@@ -1,21 +1,18 @@
+import { BrowserRouter, Route, Routes } from "react-router";
+import TaskList from "./components/TaskList";
+import TaskForm from "./components/TaskForm";
 import "./App.css";
-import { useSelector } from "react-redux";
-import { Task, TasksState } from "./types";
 
 function App() {
-  const tasksState = useSelector((state: TasksState) => state.tasks);
-
   return (
     <div className="App">
-      <h1>Tasks</h1>
-      <ul>
-        {tasksState.map((task: Task) => (
-          <li key={task.id}>
-            <h2>{task.title}</h2>
-            <p>{task.description}</p>
-          </li>
-        ))}
-      </ul>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<TaskList />} />
+          <Route path="/add" element={<TaskForm />} />
+          <Route path="/update/:id" element={<TaskForm />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
